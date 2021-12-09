@@ -1,0 +1,42 @@
+<p>Please add text here</p>
+<textarea class="textarea" id="textarea" style="width: 600px;" rows="9">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</textarea>
+
+<h1>LinkedIn text</h1>
+<div style="position:relative;">
+    <p id="raw" style="position: absolute; left: 0px; top: 0px; opacity: 0.3;"></p>
+    <p id="trimmed" style="position: absolute; left: 0px; top: 0px;"></p>
+
+
+</div>
+
+
+<script>
+
+
+
+
+    const textarea = document.getElementById('textarea');
+const raw = document.getElementById('raw');
+const trim = document.getElementById('trimmed');
+const numOfLines = 5;
+textarea.addEventListener('input', event => {
+  const text = event.target.value;
+  const split = text.split('\n');
+  const chunked = [];
+  split.forEach(item => {
+    if (item === '') {
+      chunked.push(item);
+    } else {
+      const chunks = item.match(/.{1,80}(\s|$)/g);
+      chunked.push(...chunks);
+    }
+  });
+  const trimmed = chunked.slice(0, numOfLines).join('\n');
+  const full = chunked.join('\n');
+  raw.innerText = full;
+  trim.innerText = trimmed;
+ 
+  
+});
+
+</script>
